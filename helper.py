@@ -58,28 +58,41 @@ def create_table_2(conn):
             id INT AUTO_INCREMENT PRIMARY KEY,
             customer_id INT,
             emails TEXT,
+            FOREIGN KEY (customer_id) REFERENCES people(id)
+        )
+        """
+        cursor.execute(create_table_sql)
+        for _ in range(100):
+            email = fake.email()
+            cursor.execute("SELECT id FROM people ORDER BY RAND() LIMIT 1")
+            result = cursor.fetchone()
+            customer_id = result[0] if result else None
+            insert_query = "INSERT INTO contacts (customer_id, emails) VALUES (%s, %s)"
+            cursor.execute(insert_query, (customer_id, email))
+    conn.commit()
+
+def create_table_3(conn):
+    with conn.cursor() as cursor:
+        cursor.execute("USE complexsql")
+        create_table_sql = """
+        CREATE TABLE addresses (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            customer_id INT,
             addresses TEXT,
             FOREIGN KEY (customer_id) REFERENCES people(id)
         )
         """
         cursor.execute(create_table_sql)
         for _ in range(100):
-            # Generate random email and address for the order
-            email = fake.email()
             address = fake.address()
             cursor.execute("SELECT id FROM people ORDER BY RAND() LIMIT 1")
             result = cursor.fetchone()
             customer_id = result[0] if result else None
-            
-            # Insert the order data into the orders table
-            insert_query = "INSERT INTO contacts (customer_id, emails, addresses) VALUES (%s, %s, %s)"
-            cursor.execute(insert_query, (customer_id, email, address))
+            insert_query = "INSERT INTO addresses (customer_id, addresses) VALUES (%s, %s)"
+            cursor.execute(insert_query, (customer_id, address))
     conn.commit()
 
-   
-def create_table_3():
-    names = get_fake_names()
-    emails = get_fake_emails()
+
 
 
 def drop_table_1(conn):
@@ -96,14 +109,22 @@ def drop_table_2(conn):
         cursor.execute(drop_table_sql)
     conn.commit()
 
+def drop_table_3(conn):
+    with conn.cursor() as cursor:
+        cursor.execute("USE complexsql")
+        drop_table_sql = "DROP TABLE IF EXISTS addresses"
+        cursor.execute(drop_table_sql)
+    conn.commit()
+
 
 
 def create_tables(conn):
     drop_table_1(conn)
+    drop_table_3(conn)
     drop_table_2(conn)
     create_table_1(conn)
     create_table_2(conn)
-    #create_table_3(conn)
+    create_table_3(conn)
 
     pass
 
