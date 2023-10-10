@@ -6,11 +6,11 @@ In this lab, I perform little more complex SQL queries on data stored in MySQL.
 
 First, I generated fake data from Faker library ans stored them into 3 different tables.
 
-    ![Alt Text](images/3.png)
+![Alt Text](images/3.png)
 
 Shown below are the table columns:
 
-    ![Alt Text](images/4.png)
+![Alt Text](images/4.png)
 
 # Comples Queries
 
