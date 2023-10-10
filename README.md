@@ -1,5 +1,5 @@
-[![cicd](https://github.com/nogibjj/IDS706_Template_KM632/actions/workflows/python.yml/badge.svg)](https://github.com/nogibjj/IDS706_Template_KM632/actions/workflows/python.yml)
-
+ [![cicd](https://github.com/nogibjj/IDS706_Week6_KM632/actions/workflows/python.yml/badge.svg)](https://github.com/nogibjj/IDS706_Week6_KM632/actions/workflows/python.yml)
+ 
 This repo is created as a template for my data engineering course. 
 
  The repo includes skeletons of following:
