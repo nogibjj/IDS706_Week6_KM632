@@ -117,7 +117,6 @@ def drop_table_3(conn):
     conn.commit()
 
 
-
 def create_tables(conn):
     drop_table_1(conn)
     drop_table_3(conn)
@@ -126,4 +125,45 @@ def create_tables(conn):
     create_table_2(conn)
     create_table_3(conn)
 
+def do_query_1(conn):
+    with conn.cursor() as cursor:
+        cursor.execute("USE complexsql")
+        query1 = """
+    SELECT p.firstname, p.lastname, c.emails, a.addresses
+    FROM people p
+    LEFT JOIN contacts c ON p.id = c.customer_id
+    LEFT JOIN addresses a ON p.id = a.customer_id
+    """
+        cursor.execute(query1)
+        #conn.commit()
+ 
+        result1 = cursor.fetchall()
 
+        print("List of people with their email addresses and addresses:")
+        for row in result1:
+            print(row)
+
+def do_query_2(conn):
+    with conn.cursor() as cursor:
+        cursor.execute("USE complexsql")
+        query2 = """
+    SELECT COUNT(*)
+    FROM people p
+    WHERE EXISTS (
+        SELECT 1 FROM contacts c WHERE p.id = c.customer_id
+    ) AND EXISTS (
+        SELECT 1 FROM addresses a WHERE p.id = a.customer_id
+    )
+    """
+        cursor.execute(query2)
+        #conn.commit()
+
+        result2 = cursor.fetchone()
+
+        print("Number of people who have both an email and an address:", result2[0])
+
+
+def run_queries(conn):
+    do_query_1(conn)
+    do_query_2(conn)
+    
