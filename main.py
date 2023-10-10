@@ -1,11 +1,8 @@
-def add(a, b):
-    return a + b
-
+from helper import create_database, create_tables
 
 def main():
-    a = 1
-    b = 2
-    print(add(a, b))
+    conn = create_database()
+    create_tables(conn)
 
 
 if __name__ == "__main__":
