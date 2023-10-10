@@ -1,6 +1,6 @@
  [![cicd](https://github.com/nogibjj/IDS706_Week6_KM632/actions/workflows/python.yml/badge.svg)](https://github.com/nogibjj/IDS706_Week6_KM632/actions/workflows/python.yml)
  
-## Working with MySQL
+## Week6 : Working with MySQL 
 
 In this lab, I perform little more complex SQL queries on data stored in MySQL.
 
