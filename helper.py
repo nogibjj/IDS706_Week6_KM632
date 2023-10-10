@@ -126,5 +126,4 @@ def create_tables(conn):
     create_table_2(conn)
     create_table_3(conn)
 
-    pass
 
