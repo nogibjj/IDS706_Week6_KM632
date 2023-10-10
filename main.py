@@ -5,6 +5,7 @@ def main():
     conn = create_database()
     create_tables(conn)
     run_queries(conn)
+    conn.close()
 
 
 if __name__ == "__main__":

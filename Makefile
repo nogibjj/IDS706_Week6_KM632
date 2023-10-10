@@ -11,8 +11,8 @@ lint:
 format:	
 	black *.py 
 test:
-	python -m pytest -vv --cov=main test/test_*.py
-	# --cov=main runs code coverage analysis on main 
+	python -m pytest -vv  test/test_*.py
+
 	
 		
 all: install lint format test
